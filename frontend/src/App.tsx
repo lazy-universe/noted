@@ -110,29 +110,41 @@ function App() {
 
   return (
     <>
-      <button 
-        className="mobile-menu-btn" 
-        onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-      >
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-          {isSidebarOpen ? <path d="M18 6L6 18M6 6l12 12"/> : <path d="M3 12h18M3 6h18M3 18h18"/>}
-        </svg>
-      </button>
+      {!isSidebarOpen && (
+        <button 
+          className="mobile-menu-btn" 
+          onClick={() => setIsSidebarOpen(true)}
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M3 12h18M3 6h18M3 18h18"/>
+          </svg>
+        </button>
+      )}
 
       {isSidebarOpen && <div className="sidebar-overlay" onClick={() => setIsSidebarOpen(false)} />}
 
       <aside className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
         <header className="sidebar-header">
           <h1 onClick={() => clearSelection()} style={{cursor: 'pointer'}}>Noted.</h1>
-          <button
-            onClick={fetchNotes}
-            className={`refresh-btn ${isRefreshing ? 'is-refreshing' : ''}`}
-            disabled={isRefreshing}
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" />
-            </svg>
-          </button>
+          <div className="header-actions">
+            <button
+              onClick={fetchNotes}
+              className={`refresh-btn ${isRefreshing ? 'is-refreshing' : ''}`}
+              disabled={isRefreshing}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" />
+              </svg>
+            </button>
+            <button 
+              className="close-sidebar-btn"
+              onClick={() => setIsSidebarOpen(false)}
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M18 6L6 18M6 6l12 12"/>
+              </svg>
+            </button>
+          </div>
         </header>
         <nav className="notes-list">
           {notes.map((note) => (

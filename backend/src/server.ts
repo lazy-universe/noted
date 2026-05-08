@@ -28,7 +28,6 @@ app.get('/', (req: Request, res: Response) => {
 // Start the server
 app.listen(port, async () => {
     logger.info(`--- Server starting on http://localhost:${port} ---`);
-    logger.info(`Environment: ${process.env.NODE_ENV || 'development'}`);
 
     try {
         await syncNotes();

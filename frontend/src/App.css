@@ -21,6 +21,12 @@
   color: var(--text-primary);
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .refresh-btn {
   background: transparent;
   border: none;
@@ -340,6 +346,25 @@
   z-index: 900;
 }
 
+.close-sidebar-btn {
+  display: none;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.close-sidebar-btn:hover {
+  background: var(--selection);
+  color: var(--accent);
+}
+
 @media (max-width: 768px) {
   .mobile-menu-btn {
     display: flex;
@@ -358,6 +383,10 @@
 
   .sidebar.open {
     left: 0;
+  }
+
+  .close-sidebar-btn {
+    display: flex;
   }
 
   .note-detail {
