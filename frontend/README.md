@@ -1,48 +1,37 @@
-# Noted. Frontend
+# Notes App - Frontend
 
-A premium, minimalist knowledge management interface built with React and TypeScript.
+The frontend of the Notes App is a premium, highly responsive user interface designed to provide an exceptional reading and navigation experience for your knowledge base.
 
-## ✨ Features
+## Technical Specifications
 
-- **Premium UI**: A sleek, dark-mode aesthetic featuring glassmorphism, smooth transitions, and Inter typography.
-- **Live Sync**: Subscribes to backend events (SSE) to automatically refresh the UI when files are modified on disk.
-- **Smartphone Ready**: Fully responsive drawer-based navigation for a seamless mobile experience.
-- **Wiki-link Graph**: Dedicated "Backlinks" section to navigate between related notes.
-- **Folder Support**: Visualizes your note hierarchy with folder tags and "eyebrow" metadata.
+- **Framework:** React 19
+- **Build Tool:** Vite
+- **Language:** TypeScript
+- **Linting & Formatting:** ESLint with TypeScript integration
 
-## 🎨 Tech Stack
+## Core Features
 
-- **Framework**: React 18
-- **Build Tool**: Vite
-- **Language**: TypeScript
-- **Styling**: Vanilla CSS (Modern CSS3 variables & animations)
-- **Icons**: Custom SVG-based minimalist icon set
+- **Premium Visual Aesthetics:** Designed with modern web design principles to ensure the UI is visually stunning, featuring responsive layouts, fluid typography, and subtle micro-animations.
+- **Seamless Navigation:** Integrates robust routing and browser history management for a smooth, single-page application experience when exploring notes.
+- **Knowledge Graph Interface:** Built to seamlessly consume the backend API to display complex note relationships, paving the way for an interactive, Obsidian-style graph view.
+- **Mobile-Responsive:** fully optimized for viewing and navigating on devices of all sizes, ensuring your knowledge base is accessible anywhere.
 
-## 📦 Getting Started
+## Development
+
+To start the frontend development server:
 
 ```bash
-# Install dependencies
-pnpm install
-
-# Start development server
-pnpm dev
+pnpm run dev
 ```
 
-The frontend includes a built-in proxy to the backend at `http://localhost:3000`.
-
-## 📱 Responsive Design
-
-The application uses modern CSS media queries to provide:
-- A floating hamburger menu for small screens.
-- Auto-closing sidebar on mobile after selection.
-- Optimized typography and padding for touch devices.
-
-## 🛠 Development
+To build for production:
 
 ```bash
-# Run linter
-pnpm lint
+pnpm run build
+```
 
-# Build for production
-pnpm build
+To preview the production build locally:
+
+```bash
+pnpm run preview
 ```

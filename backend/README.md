@@ -1,57 +1,37 @@
-# Noted. Backend
+# Notes App - Backend
 
-A high-performance, event-driven synchronization engine that mirrors local Markdown files to a PostgreSQL database.
+The backend of the Notes App is a robust read-only API and synchronization engine built with Node.js, Express, and PostgreSQL. It treats your local markdown files as the single source of truth and keeps the database perfectly in sync for high-performance querying and graph relationships.
 
-## 🚀 Key Features
+## Technical Specifications
 
-- **Real-time Sync**: Uses `chokidar` to watch your markdown directory and sync changes instantly.
-- **Wiki-links Support**: Automatically extracts `[[Link]]` syntax and builds a relational graph in the database.
-- **Live Sync (SSE)**: Implements Server-Sent Events to push refresh triggers to the frontend the moment a file is saved.
-- **Production Hardened**: 
-  - **Concurrency Control**: Processes large batches of files (like folder moves) in controlled pools to avoid OS file descriptor limits.
-  - **Slug Collision Handling**: Automatically manages duplicate filenames across different folders by appending prefixes.
-  - **Observability**: Structured JSON logging with automatic rotation and 7-day retention via `pino`.
+- **Runtime Environment:** Node.js
+- **Framework:** Express.js
+- **Language:** TypeScript
+- **Database:** PostgreSQL (using `pg`)
+- **File System Monitoring:** `chokidar` for real-time markdown file watching
+- **Markdown Processing:** `markdown-it` for parsing and `gray-matter` for extracting YAML frontmatter
+- **Logging:** `pino` with `pino-pretty` and `pino-roll` for robust, rotated application logging
 
-## 🛠 Tech Stack
+## Core Features
 
-- **Runtime**: Node.js with TypeScript
-- **Framework**: Express.js
-- **Database**: PostgreSQL
-- **Logging**: Pino & Pino-roll
-- **Parsing**: gray-matter (Frontmatter) & Markdown-it (HTML rendering)
+- **Markdown Sync Engine:** Automatically watches a specified directory for new, modified, or deleted markdown files and synchronizes these changes with the PostgreSQL database.
+- **Relational Data Modeling:** Stores notes, folders, tags, and bidirectional links in a structured relational format to support complex queries (e.g., for an Obsidian-like graph interface).
+- **Frontmatter Extraction:** Seamlessly parses metadata like tags, aliases, and dates from markdown frontmatter.
+- **High-Performance API:** Exposes fast REST endpoints for the frontend to fetch notes, search content, and retrieve knowledge graph linkages.
+- **Robust Error Handling:** Comprehensive 404 tracking, missing file resolution, and detailed logging for system stability.
 
-## ⚙️ Configuration
+## Development
 
-Create a `.env` file in the root directory:
-
-```env
-PORT=3000
-NOTES_DIR=/path/to/your/notes
-LOG_DIR=logs
-
-# Database
-DB_USER=krish
-DB_PASSWORD=your_password
-DB_HOST=localhost
-DB_PORT=5432
-DB_NAME=notes_db
-```
-
-## 📦 Installation
+To start the backend development server with hot-reloading:
 
 ```bash
-# Install dependencies
-pnpm install
-
-# Initialize database
-psql -h localhost -p 5433 -U krish -d notes_db -f src/db/init.sql
-
-# Start development server
-pnpm dev
+pnpm run dev
 ```
 
-## 📂 API Endpoints
+This will run the server using `nodemon` and `ts-node`.
 
-- `GET /api/notes`: List all notes.
-- `GET /api/notes/:slug`: Get detailed note content (with rendered HTML, tags, and backlinks).
-- `GET /api/notes/events`: SSE stream for real-time update triggers.
+To build for production:
+
+```bash
+pnpm run build
+```

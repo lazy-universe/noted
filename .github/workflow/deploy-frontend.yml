@@ -1,0 +1,37 @@
+name: Deploy Frontend
+
+on:
+  push:
+    branches:
+      - main
+
+    paths:
+      - 'frontend/**'
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Connect to Tailscale
+        uses: tailscale/github-action@v3
+
+        with:
+          oauth-client-id: ${{ secrets.TAILSCALE_OAUTH_CLIENT_ID }}
+          oauth-secret: ${{ secrets.TAILSCALE_OAUTH_SECRET }}
+          tags: tag:ci
+
+      - name: Deploy Frontend
+        uses: appleboy/ssh-action@v1.0.3
+
+        with:
+          host: 100.108.218.75
+          username: krish
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+
+          script: |
+            /var/www/notes-app/scripts/deploy-frontend.sh
