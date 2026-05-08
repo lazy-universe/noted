@@ -18,7 +18,7 @@ app.use('/api/notes', notesRouter);
 
 // Health check
 app.get('/health', (req: Request, res: Response) => {
-    res.json({ status: 'ok' });
+    res.json({ status: 'ok', "deployment": "github-actions-working" });
 });
 
 app.get('/', (req: Request, res: Response) => {
