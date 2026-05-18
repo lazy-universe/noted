@@ -26,3 +26,4 @@ dist-ssr
 # custom
 .env
 dist
+docs
