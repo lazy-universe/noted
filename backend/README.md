@@ -1,6 +1,6 @@
 # Noted. Backend - Engineering Doc
 
-The backend is a high-performance synchronization engine and REST API designed to bridge the gap between a local markdown filesystem and a relational database.
+The backend is a high-performance synchronization engine and REST API designed to bridge the gap between a local markdown filesystem and relational database.
 
 ## Tech Stack
 

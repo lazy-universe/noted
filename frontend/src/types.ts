@@ -1,3 +1,5 @@
+// This file contains TypeScript type definitions for the frontend folder.
+
 export interface Note {
   id: number;
   title: string;
