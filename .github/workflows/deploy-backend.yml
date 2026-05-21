@@ -12,17 +12,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Trigger infra deployment
-        run: |
-          curl --fail --silent --show-error \
-            -X POST \
-            -H "Accept: application/vnd.github+json" \
-            -H "Authorization: Bearer ${{ secrets.INFRA_DISPATCH_TOKEN }}" \
-            https://api.github.com/repos/lazy-universe/infra-automation/dispatches \
-            -d '{
-              "event_type": "deploy",
-              "client_payload": {
-                "app": "noted",
-                "component": "backend"
-              }
-            }'
+      - name: Trigger deployment
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.INFRA_DISPATCH_TOKEN }}
+          repository: lazy-universe/infra-automation
+          event-type: deploy
+          client-payload: >
+            {
+              "app": "noted",
+              "component": "backend"
+            }
